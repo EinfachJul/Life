@@ -1,0 +1,62 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\scyter\Data\Packages\Bin\fsmEditor\scriptedFSM.cfg, removeragents">*/
+class FSM
+{
+        fsmName = "removeragents";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"_time = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Check_time">*/
+                                class Check_time
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Remove_agents";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _time) > 10"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Remove_agents">*/
+                class Remove_agents
+                {
+                        name = "Remove_agents";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"{" \n
+                         "	if(agent _x isKindOf "Snake_random_F"  ||  agent _x isKindOf "Rabbit_F") then {deleteVehicle agent _x};" \n
+                         "} forEach agents;" \n
+                         "_time = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Check_time">*/
+                                class Check_time
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Remove_agents";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _time) > 10"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

@@ -1,0 +1,35 @@
+/*%FSM<COMPILE "D:\Program Files (x86)\Poseidon\Data\Packages\Bin\fsmEditor\scriptedFSM.cfg, pirateInit">*/
+class FSM
+{
+        fsmName = "tempInit";
+        class States
+        {
+                /*%FSM<STATE "FSM_executement">*/
+                        name = "FSM_executement";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn noaim_fnc_initTemp;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Wait_till_display">*/
+                                class Wait_till_display
+                                {
+                                        itemno = 0;
+                                        priority = 0.000000;
+                                        to="End_init";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(isNull (findDisplay 46))"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+                "End",
+                "End_init",
+        };
+};
+/*%FSM</COMPILE>*/

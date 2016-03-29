@@ -1,0 +1,63 @@
+/*
+	Master addAction file handler for all client-based actions.
+*/
+switch (playerSide) do
+{
+	case civilian:
+	{
+		life_actions = [player addAction["Drop Fishing Net",noaim_fnc_dropFishingNet,"",0,false,false,"",'(surfaceisWater (getPos vehicle player)) && (vehicle player isKindOf "Ship") && life_carryWeight < life_maxWeight && speed (vehicle player) < 2 && speed (vehicle player) > -1 && !life_net_dropped ']];
+		life_actions = life_actions + [player addAction["Ausrauben",noaim_fnc_robAction,"",0,false,false,"",'!isNull cursorTarget && player distance cursorTarget < 3.5 && isPlayer cursorTarget && (animationState cursorTarget=="Incapacitated" or animationState cursorTarget=="amovpercmstpsnonwnondnon_amovpercmstpssurwnondnon" or cursorTarget getVariable "restrained") && !(cursorTarget getVariable["robbed",FALSE])']];
+		life_actions = life_actions + [player addAction["Smartphone abnehmen",noaim_fnc_robsmartphoneAction,"",0,false,false,"",'!isNull cursorTarget && player distance cursorTarget < 3.5 && isPlayer cursorTarget && (animationState cursorTarget=="Incapacitated" or animationState cursorTarget=="amovpercmstpsnonwnondnon_amovpercmstpssurwnondnon" or cursorTarget getVariable "restrained") ']];
+		life_actions = life_actions + [player addAction["Harvest Organs",noaim_fnc_takeOrgans,"",0,false,false,"",'!isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && alive cursorTarget && cursorTarget distance player < 3.5 && !(cursorTarget getVariable ["missingOrgan",FALSE]) && !(player getVariable "Escorting") && !(player getVariable "hasOrgan") && !(player getVariable "transporting") && animationState cursorTarget == "Incapacitated"']];
+		life_actions = life_actions + [player addAction["<t color='#00FF00'>Ausweis zeigen</t>",noaim_fnc_civShowID,"",1,false,true,"",' playerSide == civilian && !isNull cursorTarget && cursorTarget isKindOf "Man" ']];
+		life_actions = life_actions + [player addAction["Sklave Handeln",noaim_fnc_sellHostage,"",0,false,false,"",'!isNull cursorTarget && player distance cursorTarget < 3.5 && isPlayer cursorTarget && (animationState cursorTarget=="Incapacitated" or animationState cursorTarget=="amovpercmstpsnonwnondnon_amovpercmstpssurwnondnon" or cursorTarget getVariable "restrained") ']];
+		life_actions = life_actions + [player addAction["Fleisch Grillen",noaim_fnc_cookMeat,"",-1,false,false,"",'!isNull cursorTarget && (player distance cursorTarget) < 4 && (typeOf cursorTarget) == "Land_Campfire_F" && (life_inv_henraw > 0 || life_inv_goatraw > 0 || life_inv_roosterraw > 0 || life_inv_sheepraw > 0 || life_inv_rabbitraw > 0) ']];
+		//life_actions = life_actions + [player addAction["<t color='#FF7700'>Pick Up Items</t>",{createDialog "life_pickup_items"},"",0,false,false,"",' !isNull cursorTarget && count (cursorTarget getVariable ["item",[]]) > 0 && player distance cursorTarget < 6  && !(cursorTarget getVariable "campfire")']];
+	};
+	case east:
+	{
+		life_actions = life_actions + [player addAction[localize "STR_pAct_DriverSeat",noaim_fnc_medicEnter,"driver",200,false,false,"",'!isNull cursorTarget && ((cursorTarget isKindOf "Car")||(cursorTarget isKindOf "Air")||(cursorTarget isKindOf "Ship")) && (locked cursorTarget) != 0 && cursorTarget distance player < 3.5']];
+		life_actions = life_actions + [player addAction[localize "STR_pAct_PassengerSeat",noaim_fnc_medicEnter,"passenger",100,false,false,"",'!isNull cursorTarget && ((cursorTarget isKindOf "Car")||(cursorTarget isKindOf "Air")||(cursorTarget isKindOf "Ship")) && (locked cursorTarget) != 0 && cursorTarget distance player < 3.5']]; 
+		life_actions = life_actions + [player addAction[localize "STR_pAct_GoOut",noaim_fnc_medicEnter,"exit",100,false,false,"",'(vehicle player != player) && (locked(vehicle player)==2)']];
+		life_actions = life_actions + [player addAction["<t color='#00FF00'>Dienstausweis zeigen</t>",noaim_fnc_medShowID,"",1,false,true,"",' playerSide == east && !isNull cursorTarget && cursorTarget isKindOf "Man" && cursorTarget distance player < 3.5 && (isPlayer cursorTarget)']];
+		life_actions = life_actions + [player addAction["<t color='#FF0000'>Mauer aufheben</t>",noaim_fnc_packupMauer,"",0,false,false,"",' _mauer = nearestObjects[getPos player,["Land_BagFence_Round_F"],8] select 0; !isNil "_mauer" && !isNil {(_mauer getVariable "item")}']];
+		life_actions = life_actions + [player addAction["<t color='#FF0000'>Pylone Light aufheben</t>",noaim_fnc_packupCone,"",0,false,false,"",' _roadcone = nearestObjects[getPos player,["RoadCone_L_F"],8] select 0; !isNil "_roadcone" && !isNil {(_roadcone getVariable "item")}']];
+		life_actions = life_actions + [player addAction["<t color='#FF0000'>Schranke aufheben</t>",noaim_fnc_packupSchranke,"",0,false,false,"",' _schranke = nearestObjects[getPos player,["Land_BarGate_F"],8] select 0; !isNil "_schranke" && !isNil {(_schranke getVariable "item")}']];
+		life_actions = life_actions + [player addAction["<t color='#FF0000'>Lichtschranke aufheben</t>",noaim_fnc_packupBarriere,"",0,false,false,"",' _barrierlight = nearestObjects[getPos player,["RoadBarrier_F"],8] select 0; !isNil "_barrierlight" && !isNil {(_barrierlight getVariable "item")}']];
+		life_actions pushBack (player addAction["Gegenstand platzieren",noaim_fnc_placedObject,player,0,false,false,"",'!isNull life_placing']);
+		life_actions pushBack (player addAction["Gegenstand aufheben",noaim_fnc_pickupObject,cursorTarget,0,false,false,"",' !isNull cursorTarget && !isNull (cursorTarget getVariable["owner", objNull]) && (player distance cursorTarget) < 5 ']);
+		life_actions pushBack (player addAction["Person Rausziehen",noaim_fnc_pulloutAction,cursorTarget,0,false,false,"",' !isNull cursorTarget && (player distance cursorTarget) < 4 && (count crew cursorTarget) > 0 && (cursorTarget isKindOF "Car" || cursorTarget isKindOf "Ship" || cursorTarget isKindOf "Air")']);
+	};
+	case west:
+	{
+		life_actions = [player addAction["Drogen und Alkoholtest",noaim_fnc_drugtestAction,cursorTarget,0,false,true,"",' !isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && animationState cursorTarget == "AmovPercMstpSnonWnonDnon_Ease" && (cursorTarget getVariable "restrained") && (side cursorTarget == civilian) && player distance cursorTarget < 2.5 && !(cursorTarget getVariable "Escorting") ']];
+		life_actions = [player addAction["<t color='#FF0000'>Joint ausmachen</t>",noaim_fnc_extinguishJoint,"",6, false, true, "", ' !isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && animationState cursorTarget == "AmovPercMstpSnonWnonDnon_Ease" && (cursorTarget getVariable "restrained") && (side cursorTarget == civilian) && player distance cursorTarget < 2.5 && (cursorTarget getVariable ["smoke_weed",false]) && (cursorTarget getVariable ["restrained",false]) ']];
+		life_actions = life_actions + [player addAction["Waffe beschlagnahmen",noaim_fnc_seizePlayerWeapon,cursorTarget,0,false,false,"",'!isNull cursorTarget && (player distance cursorTarget) < 6 && speed cursorTarget < 2 && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && (side cursorTarget == civilian) && (cursorTarget getVariable "restrained")']];
+		life_actions = life_actions + [player addAction[localize "STR_pAct_DriverSeat",noaim_fnc_copEnter,"driver",200,false,false,"",'!isNull cursorTarget && ((cursorTarget isKindOf "Car")||(cursorTarget isKindOf "Air")||(cursorTarget isKindOf "Ship")) && (locked cursorTarget) != 0 && cursorTarget distance player < 3.5']];
+		life_actions = life_actions + [player addAction[localize "STR_pAct_PassengerSeat",noaim_fnc_copEnter,"passenger",100,false,false,"",'!isNull cursorTarget && ((cursorTarget isKindOf "Car")||(cursorTarget isKindOf "Air")||(cursorTarget isKindOf "Ship")) && (locked cursorTarget) != 0 && cursorTarget distance player < 3.5']]; 
+		life_actions = life_actions + [player addAction[localize "STR_pAct_CommanderSeat",noaim_fnc_copEnter,"commander",100,false,false,"",'!isNull cursorTarget && ((cursorTarget isKindOf "Car")||(cursorTarget isKindOf "Air")||(cursorTarget isKindOf "Ship")) && (locked cursorTarget) != 0 && cursorTarget distance player < 3.5 && (cursorTarget isKindOf "I_MRAP_03_F")']]; 
+		life_actions = life_actions + [player addAction[localize "STR_pAct_GoOut",noaim_fnc_copEnter,"exit",100,false,false,"",'(vehicle player != player) && (locked(vehicle player)==2)']];
+		life_actions = life_actions + [player addAction["<t color='#00FF00'>EMP Operator Konsole oeffnen</t>",noaim_fnc_openEmpMenu,[],8,false,false,"",'[_this] call noaim_fnc_isEmpOperator']];
+		life_actions = life_actions + [player addAction["Waffen entfernen",noaim_fnc_seizeObjects,cursorTarget,0,false,false,"",'count(nearestObjects [player,["weaponholder"],3])>0']];
+		life_actions = life_actions + [player addAction["<t color='#00FF00'>Dienstausweis zeigen</t>",noaim_fnc_copShowID,"",1,false,true,"",' playerSide == west && !isNull cursorTarget && cursorTarget isKindOf "Man" && cursorTarget distance player < 3.5 && (isPlayer cursorTarget)']];
+		life_actions = life_actions + [player addAction["<t color='#FF0000'>Mauer aufheben</t>",noaim_fnc_packupMauer,"",0,false,false,"",' _mauer = nearestObjects[getPos player,["Land_BagFence_Round_F"],8] select 0; !isNil "_mauer" && !isNil {(_mauer getVariable "item")}']];
+		life_actions = life_actions + [player addAction["<t color='#FF0000'>Pylone Light aufheben</t>",noaim_fnc_packupCone,"",0,false,false,"",' _roadcone = nearestObjects[getPos player,["RoadCone_L_F"],8] select 0; !isNil "_roadcone" && !isNil {(_roadcone getVariable "item")}']];
+		life_actions = life_actions + [player addAction["<t color='#FF0000'>Schranke aufheben</t>",noaim_fnc_packupSchranke,"",0,false,false,"",' _schranke = nearestObjects[getPos player,["Land_BarGate_F"],8] select 0; !isNil "_schranke" && !isNil {(_schranke getVariable "item")}']];
+		life_actions = life_actions + [player addAction["<t color='#FF0000'>Lichtschranke aufheben</t>",noaim_fnc_packupBarriere,"",0,false,false,"",' _barrierlight = nearestObjects[getPos player,["RoadBarrier_F"],8] select 0; !isNil "_barrierlight" && !isNil {(_barrierlight getVariable "item")}']];
+		life_actions pushBack (player addAction["Gegenstand platzieren",noaim_fnc_placedObject,player,0,false,false,"",'!isNull life_placing']);
+		life_actions pushBack (player addAction["Gegenstand aufheben",noaim_fnc_pickupObject,cursorTarget,0,false,false,"",' !isNull cursorTarget && !isNull (cursorTarget getVariable["owner", objNull]) && (player distance cursorTarget) < 5 ']);
+		
+		life_actions pushBack (player addAction["Pickup Item(s)",{createDialog "life_pickup_items"},"",0,false,false,"",' !isNull life_cursorTarget && count (life_cursorTarget getVariable ["item",[]]) > 0 && player distance life_cursorTarget < 5 ']);
+		//life_actions = life_actions + [player addAction["<t color='#FF7700'>Pick Up Items</t>",{createDialog "life_pickup_items"},"",0,false,false,"",' !isNull cursorTarget && count (cursorTarget getVariable ["item",[]]) > 0 && player distance cursorTarget < 6  && !(cursorTarget getVariable "campfire")']];
+		//=============================================================
+		//life_actions = life_actions + [player addAction["Geld aufheben",{_obj = cursorTarget; _obj setVariable["inUse",TRUE,TRUE]; _handle = [_obj] spawn noaim_fnc_pickupMoney; waitUntil {scriptDone _handle};},"",0,false,false,"",'((typeOf cursorTarget) == "Land_Money_F" && (player distance cursorTarget < 2))']];
+		
+		life_actions pushBack (player addAction["Add IR Laser (Non-Lethal)",noaim_fnc_nonLethal,"add",0,false,false,"",'"acc_pointer_IR" in (items player) && !("acc_pointer_IR" in (primaryWeaponItems player)) && (currentWeapon player) == "srifle_DMR_03_F" ']);
+		life_actions pushBack (player addAction["Remove IR Laser (Lethal)",noaim_fnc_nonLethal,"rem",0,false,false,"",'!("acc_pointer_IR" in (items player)) && ("acc_pointer_IR" in (primaryWeaponItems player)) && (currentWeapon player) == "srifle_DMR_03_F" ']);
+	};
+	case independent:
+	{
+		//life_actions = life_actions + [player addAction[localize "STR_pAct_GoOut",noaim_fnc_alacEnter,"exit",100,false,false,"",'(vehicle player != player) && (locked(vehicle player)==2)']];
+		//life_actions = life_actions + [player addAction["<t color='#00FF00'>Dienstausweis zeigen</t>",noaim_fnc_alacShowID,"",1,false,true,"",' playerSide == east && !isNull cursorTarget && cursorTarget isKindOf "Man" && cursorTarget distance player < 3.5 && (isPlayer cursorTarget)']];	
+	};
+};

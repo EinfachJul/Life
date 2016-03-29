@@ -1,0 +1,214 @@
+/*
+	Author: Bryan "Tonic" Boardwine
+	Master configuration file for Reb shop.
+*/
+private["_filter"];
+_filter = [_this,0,0,[0]] call BIS_fnc_param;
+ctrlSetText[3103,"Rebellenshop"];
+
+switch (_filter) do
+{
+	//Uniformss
+	case 0:
+	{
+		[
+			["U_OG_leader",nil,25000],
+			["U_IG_leader",nil,25000],
+			["U_I_CombatUniform_shortsleeve",nil,36000],
+			["U_I_Wetsuit",nil,120000],
+			["U_O_Wetsuit",nil,140000],
+			["U_I_G_Story_Protagonist_F",nil,80000],
+			["U_B_PilotCoveralls",nil,80000],
+			["U_IG_Guerilla2_3",nil,75000],
+			["U_IG_Guerilla3_2",nil,75000],
+			["U_BG_Guerilla1_1",nil,75000],
+			["U_BG_Guerilla2_1",nil,75000],
+			["U_BG_Guerilla2_2",nil,75000],
+			["U_BG_Guerilla2_3",nil,75000],
+			//["U_BG_Guerrilla_6_1",nil,75000],
+			["U_BG_leader",nil,80000],
+			["U_O_SpecopsUniform_ocamo",nil,70000],
+			["U_O_PilotCoveralls",nil,40000],
+			["U_O_OfficerUniform_ocamo",nil,75000],
+			["U_O_CombatUniform_oucamo",nil,60000],
+			["U_O_CombatUniform_ocamo",nil,60000],
+			["U_I_pilotCoveralls",nil,75000],
+			["U_I_CombatUniform_tshirt",nil,60000],
+			["U_C_HunterBody_grn",nil,50000],
+			["U_IG_Guerilla1_1",nil,50000],
+			["U_OG_Guerilla2_3","Guerilla Leader",50000],
+			["U_OG_Guerilla2_1",nil,50000],
+			["U_OG_Guerilla1_1",nil,50000],
+			["U_I_G_resistanceLeader_F",nil,25000],
+			["U_B_GhillieSuit",nil,150000],
+			["U_O_GhillieSuit",nil,150000],
+			["U_I_GhillieSuit",nil,150000],
+			["U_B_FullGhillie_lsh",nil,250000],
+			["U_B_FullGhillie_sard",nil,250000],
+			["U_B_FullGhillie_ard",nil,250000],
+			["U_I_FullGhillie_lsh",nil,250000],
+			["U_I_FullGhillie_sard",nil,250000],
+			["U_I_FullGhillie_ard",nil,250000],
+			["U_O_FullGhillie_ard",nil,250000],
+			["U_O_FullGhillie_sard",nil,250000],
+			["U_O_FullGhillie_lsh",nil,250000]
+		];
+	};
+	
+	//Hats
+	case 1:
+	{
+		[
+			["H_HelmetB",nil,1000],
+			["H_HelmetB_camo",nil,1200],
+			["H_HelmetB_light",nil,1500],
+			["H_HelmetB_light_desert",nil,1700],
+			["H_HelmetB_light_grass",nil,1800],
+			["H_HelmetB_light_snakeskin",nil,2000],
+			["H_HelmetB_paint",nil,2100],
+			["H_Booniehat_khk",nil,2100],
+			["H_Booniehat_oli",nil,2100],
+			["H_Booniehat_indp",nil,2100],
+			["H_Booniehat_mcamo",nil,2100],
+			["H_Booniehat_grn",nil,2100],
+			["H_Booniehat_tan",nil,2100],
+			["H_Booniehat_dirty",nil,2100],
+			["H_Booniehat_dgtl",nil,2100],
+			["H_Booniehat_khk_hs",nil,2100],
+			["H_Hat_camo",nil,2100],
+			["H_Hat_tan",nil,2100],
+			["H_Cap_headphones",nil,2100],
+			["H_Cap_blk_CMMG",nil,2100],
+			["H_Cap_grn",nil,2100],
+			["H_Cap_oli_hs",nil,2100],
+			["H_Cap_surfer",nil,2100],
+			["H_Bandanna_surfer",nil,2100],
+			["H_MilCap_ocamo",nil,2100],
+			["H_MilCap_mcamo",nil,2100],
+			["H_MilCap_oucamo",nil,2100],
+			["H_MilCap_rucamo",nil,2100],
+			["H_MilCap_gry",nil,2100],
+			["H_MilCap_dgtl",nil,2100],
+			["H_Cap_brn_SPECOPS",nil,2400],
+			["H_Cap_tan_specops_US",nil,2400],
+			["H_Cap_khaki_specops_UK",nil,2400],
+			["H_Bandanna_khk",nil,2500],
+			["H_Bandanna_gry",nil,2500],
+			["H_Bandanna_cbr",nil,2500],
+			["H_Bandanna_sgg",nil,2500],
+			["H_Bandanna_sand",nil,2500],
+			["H_Bandanna_camo",nil,2500],
+			["H_Bandanna_mcamo",nil,2500],
+			["H_Beret_grn",nil,2600],
+			["H_Beret_grn_SF",nil,2600],
+			["H_Watchcap_cbr",nil,2700],
+			["H_Watchcap_khk",nil,2700],
+			["H_Watchcap_camo",nil,2700],
+			["H_HelmetIA_net",nil,2900],
+			["H_HelmetO_ocamo",nil,3200],
+			["H_HelmetSpecB_paint1",nil,3600],
+			["H_HelmetSpecB_paint2",nil,3700],
+			["H_Shemag_khk",nil,50000],
+			["H_Shemag_olive",nil,50000],
+			["H_Shemag_tan",nil,50000],
+			["H_ShemagOpen_khk",nil,50000],
+			["H_CrewHelmetHeli_O",nil,16500],
+			["H_CrewHelmetHeli_I",nil,16500],
+			["H_PilotHelmetFighter_I",nil,150000],
+			["H_PilotHelmetFighter_O",nil,150000],
+			["H_HelmetIA_camo",nil,10000],
+			["H_HelmetIA",nil,10000],
+			["H_HelmetLeaderO_ocamo",nil,15000],
+			["H_HelmetCrew_I",nil,25000],
+			["H_Watchcap_blk",nil,1500],
+			["H_Cap_blk_Raven",nil,8500]
+		];
+	};
+	
+	//Glasses
+	case 2:
+	{
+		[
+			["G_Shades_Black",nil,110],
+			["G_Shades_Blue",nil,120],
+			["G_Shades_Green",nil,130],
+			["G_Shades_Red",nil,140],
+			["G_Spectacles",nil,150],
+			["G_Spectacles_Tinted",nil,160],
+			["G_Sport_Blackred",nil,170],
+			["G_Sport_Checkered",nil,180],
+			["G_Sport_Blackyellow",nil,190],
+			["G_Sport_BlackWhite",nil,200],
+			["G_Sport_Greenblack",nil,210],
+			["G_Sport_Red",nil,220],
+			["G_Squares",nil,230],
+			["G_Aviator",nil,240],
+			["G_Lady_Blue",nil,250],
+			["G_Tactical_Black",nil,500],
+			["G_Tactical_Clear",nil,700],
+			["G_Lowprofile",nil,1000],
+			["G_Combat",nil,1200],
+			["G_Bandanna_tan",nil,2000],
+			["G_Bandanna_oli",nil,3000],
+			["G_Bandanna_blk",nil,4000],
+			["G_Bandanna_beast",nil,5000],
+			["G_Bandanna_shades",nil,6000],
+			["G_Bandanna_sport",nil,7000],
+			["G_Bandanna_aviator",nil,8000],
+			["G_Balaclava_blk",nil,9000],
+			["G_Balaclava_oli",nil,10000],
+			["G_Balaclava_lowprofile",nil,11000],
+			["G_Balaclava_combat",nil,12000],
+			["G_Diving","Tauchermaske",1500]
+		];
+	};
+	
+	//Vest
+	case 3:
+	{
+		[
+			["V_PlateCarrier1_rgr",nil,15000],
+			["V_BandollierB_cbr",nil,17000],
+			["V_BandollierB_khk",nil,18000],
+			["V_BandollierB_oli",nil,19000],
+			["V_BandollierB_rgr",nil,10000],
+			["V_Chestrig_khk",nil,12000],
+			["V_Chestrig_oli",nil,13000],
+			["V_HarnessOGL_brn",nil,17000],
+			["V_HarnessOSpec_brn",nil,19000],
+			["V_TacVest_brn",nil,22000],
+			["V_RebreatherIR","Atemgeraet",32000],
+			["V_RebreatherIA","Atemgeraet",33000],
+			["V_TacVest_khk",nil,150000],
+			["V_HarnessO_brn",nil,150000]
+		];
+	};
+	
+	//Backpacks
+	case 4:
+	{
+		[
+			["B_AssaultPack_dgtl",nil,15000],
+			["B_AssaultPack_khk",nil,15000],
+			["B_AssaultPack_mcamo",nil,15000],
+			["B_AssaultPack_ocamo",nil,15000],
+			["B_AssaultPack_rgr",nil,15000],
+			["B_AssaultPack_sgg",nil,15000],
+			["B_AssaultPack_Kerry",nil,15000],
+			["B_FieldPack_cbr",nil,20000],
+			["B_FieldPack_ocamo",nil,20000],
+			["B_FieldPack_khk",nil,20000],
+			["B_FieldPack_oucamo",nil,20000],
+			["B_BergenC_grn",nil,25000],
+			["B_TacticalPack_mcamo",nil,35000],
+			["B_TacticalPack_ocamo",nil,35000],
+			["B_TacticalPack_rgr",nil,35000],
+			["B_TacticalPack_oli","Outdoor RS (Camo)",65000],
+			["B_Kitbag_mcamo","Sport RS (Camo)",85000],
+			["B_Carryall_ocamo","Großer RS (Desert)",125000],
+			["B_Carryall_oli","Großer RS (Camo)",125000],
+			["B_Carryall_oucamo","Unsichtbar",250000],
+			["B_Parachute",nil,20000]
+		];
+	};
+};

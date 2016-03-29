@@ -1,0 +1,61 @@
+/*%FSM<COMPILE "E:\Program Files (x86)\Aryx\Data\Packages\Bin\fsmEditor\scriptedFSM.cfg, tempWeatherReset">*/
+class FSM
+{
+        fsmName = "tempWeatherReset";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Check_weather">*/
+                                class Check_weather
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Reset_weather";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"fogForecast > 0 || rain > 0 || overcast > 0"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Reset_weather">*/
+                class Reset_weather
+                {
+                        name = "Reset_weather";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"3 setFog 0;" \n
+                         "3 setRain 0;" \n
+                         "3 setOvercast 0;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Check_weather">*/
+                                class Check_weather
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Reset_weather";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"fogForecast > 0 || rain > 0 || overcast > 0"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

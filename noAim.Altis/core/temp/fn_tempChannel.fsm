@@ -1,0 +1,82 @@
+/*%FSM<COMPILE "E:\Program Files (x86)\aryx\Data\Packages\Bin\fsmEditor\scriptedFSM.cfg, tempChannel">*/
+class FSM
+{
+        fsmName = "tempChannel";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Channel_speaking">*/
+                                class Channel_speaking
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Var_broadcast";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNull findDisplay 55 && !isNull findDisplay 63 && (ctrlText ((findDisplay 55) displayCtrl 101) == ""\A3\ui_f\data\igui\rscingameui\rscdisplayvoicechat\microphone_ca.paa"") && !isNull findDisplay 55 && !isNull findDisplay 63 && (ctrlText ((findDisplay 55) displayCtrl 101) == ""\A3\ui_f\data\igui\rscingameui\rscdisplayvoicechat\microphone_ca.paa"") && currentChannel == 5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Var_broadcast">*/
+                class Var_broadcast
+                {
+                        name = "Var_broadcast";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"player setVariable[""direct"",true,true];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Stop_speaking_ch">*/
+                                class Stop_speaking_ch
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Var_broadcast_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isNull findDisplay 55 || isNull findDisplay 63 || currentChannel != 5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Var_broadcast_1">*/
+                class Var_broadcast_1
+                {
+                        name = "Var_broadcast_1";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/"player setVariable[""direct"",false,true];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Channel_speaking">*/
+                                class Channel_speaking
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Var_broadcast";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNull findDisplay 55 && !isNull findDisplay 63 && (ctrlText ((findDisplay 55) displayCtrl 101) == ""\A3\ui_f\data\igui\rscingameui\rscdisplayvoicechat\microphone_ca.paa"") && !isNull findDisplay 55 && !isNull findDisplay 63 && (ctrlText ((findDisplay 55) displayCtrl 101) == ""\A3\ui_f\data\igui\rscingameui\rscdisplayvoicechat\microphone_ca.paa"") && currentChannel == 5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

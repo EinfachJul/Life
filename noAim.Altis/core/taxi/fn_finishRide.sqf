@@ -1,0 +1,11 @@
+_cash = _this select 0;
+_pricePerM = _this select 1;
+_totalDistance = (_cash/_pricePerM);
+_totalDistance = floor _totalDistance;
+life_znorak = life_znorak + _cash;
+player removeAction taxi_ActionToLeave;
+_message = parseText format ["Ihr Kunde hat den Service gestoppt, Sie erhalten %1 € fuer die %2 meter. Sie wurden wieder als Freier Taxifahrer in der Auftragsliste eingetragen.",_cash,_totalDistance];
+titleText[format["%1",_message],"PLAIN"];
+life_isOnDutyTaxi = true;
+//[[player],"TON_fnc_goOnDuty",false,false] spawn noaim_fnc_LAST;
+[player] remoteExec ["TON_fnc_goOnDuty",2];
