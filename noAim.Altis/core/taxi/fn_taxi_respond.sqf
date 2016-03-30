@@ -1,7 +1,7 @@
 _mode = [_this, 0, -1] call BIS_fnc_param;
 _info = [_this, 1, -1] call BIS_fnc_param;
 pricePerM = 4;
-NoAimPaid = -1;
+NoAim_Paid = -1;
 
 switch (_mode) do
 {
@@ -31,7 +31,7 @@ switch (_mode) do
  +				{
  +					life_zgazzy = life_zgazzy - life_taxiTotalPrice;
  +				};
- +			[[life_taxiTotalPrice,pricePerM,NoAimPaid],"noaim_fnc_finishRide",life_taxiDriver,false] spawn noaim_fnc_MP;
+ +			[[life_taxiTotalPrice,pricePerM,NoAim_Paid],"noaim_fnc_finishRide",life_taxiDriver,false] spawn noaim_fnc_MP;
 		}];
 		_oldTaxiPos = getPos player;
 		life_taxiTotalPrice = 0;
