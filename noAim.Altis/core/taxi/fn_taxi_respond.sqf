@@ -1,6 +1,7 @@
 _mode = [_this, 0, -1] call BIS_fnc_param;
 _info = [_this, 1, -1] call BIS_fnc_param;
 pricePerM = 4;
+NoAimPaid = -1;
 
 switch (_mode) do
 {
@@ -22,10 +23,15 @@ switch (_mode) do
 			hint format ["Sie haben den Taxiservice abgebrochen oder beendet, Sie haben %1 € fuer die Fahrt bezahlt.",life_taxiTotalPrice];
 			life_calledTaxi = false;
 			life_inTaxi = false;
-			if (life_zgazzy<life_taxiTotalPrice) then {life_zgazzy = 0;} else { life_zgazzy = life_zgazzy - life_taxiTotalPrice;};
-			//[[life_taxiTotalPrice,pricePerM],"noaim_fnc_finishRide",life_taxiDriver,false] spawn noaim_fnc_LAST;
-			[life_taxiTotalPrice,pricePerM] remoteExec ["noaim_fnc_finishRide",life_taxiDriver];
-			player removeAction taxi_ActionToLeave;
+			if (life_zgazzy<life_taxiTotalPrice) then
+ +				{
+ +					NoAim_Paid = life_zgazzy; life_zgazzy = 0;
+ +				}
+ +			else
+ +				{
+ +					life_zgazzy = life_zgazzy - life_taxiTotalPrice;
+ +				};
+ +			[[life_taxiTotalPrice,pricePerM,NoAimPaid],"noaim_fnc_finishRide",life_taxiDriver,false] spawn noaim_fnc_MP;
 		}];
 		_oldTaxiPos = getPos player;
 		life_taxiTotalPrice = 0;
